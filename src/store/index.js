@@ -29,7 +29,7 @@ export default new Vuex.Store({
     },
     actions: {
         async getProduct(context) {
-            fetch('http://localhost:8080/products')
+            fetch('http://localhost:3000/products')
                 .then((res) => {
                     return res.json()
                 })
@@ -39,7 +39,7 @@ export default new Vuex.Store({
                 })
         },
         getCategory(context, id) {
-            fetch(`http://localhost:8080/categoryId=${id}`)
+            fetch(`http://localhost:3000/products?categoryId=${id}`)
                 .then((res) => {
                     return res.json()
                 })
@@ -49,7 +49,7 @@ export default new Vuex.Store({
                 })
         },
         getDetail(context, id) {
-            fetch(`http://localhost:8080/productId=${id}`)
+            fetch(`http://localhost:3000/products?id=${id}`)
                 .then((res) => {
                     return res.json()
                 })
@@ -59,7 +59,7 @@ export default new Vuex.Store({
                 })
         },
         arttir(context, id) {
-            fetch(`http://localhost:8080/productId=${id}`)
+            fetch(`http://localhost:3000/products?id=${id}`)
                 .then((res) => {
                     return res.json()
                 })
