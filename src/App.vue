@@ -53,11 +53,18 @@
                         Sepetim {{sepet.length}}
                     </router-link>
                 </li>
-                    <li style="margin-left: 12px;">
+                    <li v-if="sedat === null " style="margin-left: 12px;" >
                         <router-link class="nav-link btn btn-success   " :to="{path:'/login'}" role="button"
                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                             Giriş
                         </router-link>
+
+                    </li>
+                    <li v-else style="margin-left: 12px;" >
+                        <a class="nav-link btn btn-danger   " v-on:click="sil()" role="button"
+                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                           {{sedat.name}}
+                        </a>
                     </li>
 
                 </ul>
@@ -76,9 +83,15 @@
         name: "App",
         components:{
             Usernav
+        },data(){
+            return{
+                sedat: JSON.parse(localStorage.getItem('user')),
+
+            }
+
         },
         computed: {
-            ...mapState(["movies", "sepet"]),
+            ...mapState(["movies", "sepet","user"]),
             productList() {
                 return `${this.movies.id}`
             }
@@ -94,6 +107,12 @@
             },
             watch: {
                 '$route': 'created'
+            },
+            sil(){
+                localStorage.removeItem('user');
+                localStorage.removeItem('sepet');
+                window.location.reload();
+
             }
         }
 

@@ -1,11 +1,12 @@
 package com.backendvue.backendvue.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@CrossOrigin(origins = {"https://192.168.1.22:8080","file://",  "http://localhost:8080"})
 public class UserController {
     @Autowired
     UserService userService;
@@ -14,4 +15,8 @@ public class UserController {
         return userService.userSave(userEntity);
     }
 
+    @GetMapping("/user/{email}")
+    public UserEntity getUser  (@PathVariable String email ){
+         return userService.getUser(email);
+    }
 }

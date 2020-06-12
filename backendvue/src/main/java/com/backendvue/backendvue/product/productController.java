@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"https://192.168.1.22:8081","file://",  "http://localhost:8081"})
+@CrossOrigin(origins = {"https://192.168.1.22:8080","file://",  "http://localhost:8080"})
 public class productController {
      @Autowired
     private ProductService productService;

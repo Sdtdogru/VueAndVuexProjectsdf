@@ -9,7 +9,8 @@ export default new Vuex.Store({
         movies: [],
         category: [],
         detail: {},
-        sepet: []
+        sepet: [],
+        user:[]
 
     },
     mutations: {
@@ -24,12 +25,15 @@ export default new Vuex.Store({
 
         },
         arttir(state, ekle) {
-            state.sepet.push(ekle)
+            state.sepet.push(ekle);
+        },
+        login(state,user){
+            localStorage.setItem('user', JSON.stringify(user));
         }
     },
     actions: {
         async getProduct(context) {
-            fetch('http://localhost:3000/products')
+            fetch('http://localhost:4000x"/products')
                 .then((res) => {
                     return res.json()
                 })
@@ -39,7 +43,7 @@ export default new Vuex.Store({
                 })
         },
         getCategory(context, id) {
-            fetch(`http://localhost:3000/products?categoryId=${id}`)
+            fetch(`https://fab45a714a9c.ngrok.io/products?categoryId=${id}`)
                 .then((res) => {
                     return res.json()
                 })
@@ -49,7 +53,7 @@ export default new Vuex.Store({
                 })
         },
         getDetail(context, id) {
-            fetch(`http://localhost:3000/products?id=${id}`)
+            fetch(`https://fab45a714a9c.ngrok.io/products?id=${id}`)
                 .then((res) => {
                     return res.json()
                 })
@@ -59,12 +63,30 @@ export default new Vuex.Store({
                 })
         },
         arttir(context, id) {
-            fetch(`http://localhost:3000/products?id=${id}`)
+            fetch(`https://fab45a714a9c.ngrok.io/products?id=${id}`)
                 .then((res) => {
                     return res.json()
                 })
                 .then((res) => {
                     context.commit('arttir', res)
+
+                })
+        },
+       async userAdd(user){
+            fetch(`https://fab45a714a9c.ngrok.io/user`,{
+                method:'POST',
+                body:JSON.stringify(user),
+               headers:{"Content-Type":"application/json"}
+            }).then(reset => alert(reset))
+        },
+        async login(context,email){
+            fetch(`https://fab45a714a9c.ngrok.io/user/${email}`)
+                .then((res) => {
+                    return res.json()
+
+                })
+                .then((res) => {
+                    context.commit('login', res)
 
                 })
         }
